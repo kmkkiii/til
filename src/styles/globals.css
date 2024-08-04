@@ -67,3 +67,8 @@
     @apply bg-background text-foreground;
   }
 }
+
+:where(header, footer, main, aside) {
+  max-width: 40ic;
+  margin-inline: auto;
+}
