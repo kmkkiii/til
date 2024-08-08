@@ -35,10 +35,10 @@ const ogpImageURL = new URL("/kmkkiii.png", canonicalURL);
 							<CardTitle className='text-md'>{post.title}</CardTitle>
 							<CardDescription>
 								<div class="flex items-center">
-									<div class="text-xs mr-2">公開日: {post.date}</div>
+									<div class="text-xs mr-2">{post.date}</div>
 									{
 										post.tags.map((tag) => (
-											<div class="bg-slate-300 dark:bg-slate-500 rounded-sm text-xs mx-1 py-1 px-2">
+											<div class="bg-slate-300 dark:bg-slate-500 rounded-full text-xs mx-1 py-1 px-2">
 												{tag}
 											</div>
 										))
