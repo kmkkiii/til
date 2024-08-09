@@ -49,22 +49,22 @@ const { page } = Astro.props as { page: Page<Post> };
 	<Pagination>
 		<PaginationContent>
 			<PaginationItem hidden={!page.url.prev}>
-				<PaginationPrevious href={page.url.prev} />
+				<PaginationPrevious href={`/til${page.url.prev}`} />
 			</PaginationItem>
 			<PaginationItem hidden={!page.url.prev}>
-				<PaginationLink href={page.url.prev}>{page.currentPage - 1}</PaginationLink>
+				<PaginationLink href={`/til${page.url.prev}`}>{page.currentPage - 1}</PaginationLink>
 			</PaginationItem>
 			<PaginationItem>
 				<PaginationLink isActive>{page.currentPage}</PaginationLink>
 			</PaginationItem>
 			<PaginationItem hidden={!page.url.next}>
-				<PaginationLink href={page.url.next}>{page.currentPage + 1}</PaginationLink>
+				<PaginationLink href={`/til${page.url.next}`}>{page.currentPage + 1}</PaginationLink>
 			</PaginationItem>
 			<PaginationItem hidden={page.currentPage + 1 <= page.total}>
 				<PaginationEllipsis />
 			</PaginationItem>
 			<PaginationItem hidden={!page.url.next}>
-				<PaginationNext href={page.url.next} />
+				<PaginationNext href={`/til${page.url.next}`} />
 			</PaginationItem>
 		</PaginationContent>
 	</Pagination>
