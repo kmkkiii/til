@@ -23,7 +23,7 @@ const { page } = Astro.props as { page: Page<Post> };
 		page.data.map((post) => {
 			return (
 				<>
-					<Card className='hover:bg-accent my-2'>
+					<Card className='hover:bg-accent my-5'>
 						<a href={post.slug}>
 							<CardHeader>
 								<CardTitle className='text-md'>{post.title}</CardTitle>
