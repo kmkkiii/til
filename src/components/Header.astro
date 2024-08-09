@@ -1,9 +1,12 @@
 ---
 import { ModeToggle } from "./ModeToggle";
+import { Button } from "@/components/ui/button";
 
 ---
 
 <header class="flex justify-between items-center mt-2">
-  <a href="/" class="font-semibold text-xl py-1 px-2 rounded-md hover:bg-accent">Today I Learned.</a>
+  <Button variant="ghost">
+    <a href="/" class="font-semibold text-xl">Today I Learned.</a>
+  </Button>
   <ModeToggle client:load />
 </header>
