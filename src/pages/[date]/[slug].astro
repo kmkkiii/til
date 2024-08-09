@@ -49,6 +49,11 @@ const slug = Astro.params.slug;
 const html = markdownHtml(body, {
   embedOrigin: "https://embed.zenn.studio",
 });
+
+const siteUrl = "https://kmkkiii.github.io";
+
+const canonicalURL = new URL(Astro.url.pathname, siteUrl);
+const ogpImageURL = new URL("/kmkkiii.png", canonicalURL);
 ---
 
 <Layout title={title}>
@@ -57,16 +62,16 @@ const html = markdownHtml(body, {
     <meta name="twitter:card" content="summary_large_image" />
     <meta
       name="twitter:image"
-      content={`https://ogp-generate.j-y-87524086.workers.dev?msg=${title}`}
+      content={ogpImageURL}
     />
     <meta name="twitter:title" content={title} />
-    <meta name="twitter:url" content={`https://jy-panda.com/${slug}`} />
+    <meta name="twitter:url" content={`${siteUrl}/${slug}`} />
 
-    <meta property="og:url" content={`https://jy-panda.com/${slug}`} />
+    <meta property="og:url" content={`${siteUrl}/${slug}`} />
     <meta property="og:title" content={title} />
     <meta
       property="og:image"
-      content={`https://ogp-generate.j-y-87524086.workers.dev?msg=${title}`}
+      content={ogpImageURL}
     />
   </head>
   <div class="p-10 max-w-3xl m-auto">
