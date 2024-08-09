@@ -1,0 +1,71 @@
+---
+import type { GetStaticPaths, Page } from "astro";
+import '../styles/globals.css'
+import Layout from '../layouts/Layout.astro';
+
+import { getAllPosts, type Post } from "../lib/post";
+import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Pagination, PaginationContent, PaginationItem, PaginationPrevious, PaginationLink, PaginationEllipsis, PaginationNext } from "@/components/ui/pagination";
+
+export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
+  const allPosts = await getAllPosts();
+
+  return paginate(allPosts, {
+    pageSize: 5,
+  });
+};
+
+const { page } = Astro.props as { page: Page<Post> };
+---
+
+<Layout title="Today I Learned | kmkkiii">
+	{
+		page.data.map((post) => {
+			return (
+				<>
+					<Card className='hover:bg-accent my-2'>
+						<a href={post.slug}>
+							<CardHeader>
+								<CardTitle className='text-md'>{post.title}</CardTitle>
+								<CardDescription>
+									<div class="flex items-center">
+										<div class="text-xs mr-2">{post.date}</div>
+										{
+											post.tags.map((tag) => (
+												<div class="bg-slate-300 dark:bg-slate-500 rounded-full text-xs mx-1 py-1 px-2">
+													{tag}
+												</div>
+											))
+										}
+									</div>
+								</CardDescription>
+							</CardHeader>
+						</a>
+					</Card>
+				</>
+			)
+		})
+	}
+	<Pagination>
+		<PaginationContent>
+			<PaginationItem hidden={!page.url.prev}>
+				<PaginationPrevious href={page.url.prev} />
+			</PaginationItem>
+			<PaginationItem hidden={!page.url.prev}>
+				<PaginationLink href={page.url.prev}>{page.currentPage - 1}</PaginationLink>
+			</PaginationItem>
+			<PaginationItem>
+				<PaginationLink isActive>{page.currentPage}</PaginationLink>
+			</PaginationItem>
+			<PaginationItem hidden={!page.url.next}>
+				<PaginationLink href={page.url.next}>{page.currentPage + 1}</PaginationLink>
+			</PaginationItem>
+			<PaginationItem hidden={page.currentPage + 1 <= page.total}>
+				<PaginationEllipsis />
+			</PaginationItem>
+			<PaginationItem hidden={!page.url.next}>
+				<PaginationNext href={page.url.next} />
+			</PaginationItem>
+		</PaginationContent>
+	</Pagination>
+</Layout>
