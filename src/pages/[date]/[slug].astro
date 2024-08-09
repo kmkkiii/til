@@ -1,8 +1,8 @@
 ---
-import '../styles/globals.css'
-import { getAllPosts } from "../lib/post";
+import '../../styles/globals.css'
+import { getAllPosts } from "../../lib/post";
 import lib from "zenn-markdown-html";
-import Layout from "../layouts/Layout.astro";
+import Layout from "../../layouts/Layout.astro";
 import {Post} from "@/components/Post";
 
 type MarkdownOptions = {
@@ -27,9 +27,12 @@ export interface Props {
 export async function getStaticPaths() {
   const posts = await getAllPosts();
   return posts.map((post) => {
+    const [date, slug] = post.slug.split("/");
+
     return {
       params: {
-        slug: post.slug,
+        date,
+        slug,
       },
       props: {
         title: post.title,
