@@ -11,4 +11,6 @@ export default defineConfig({
     }),
     react(),
   ],
+  site: "https://kmkkiii.github.io",
+  base: "/til",
 });
