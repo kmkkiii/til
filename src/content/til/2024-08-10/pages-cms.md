@@ -7,7 +7,7 @@ published: true
 ---
 このサイトのCMSとして`Pages CMS`を採用した。
 
-[https://pagescms.org/](https://pagescms.org/)
+https://pagescms.org/
 
 GitHubリポジトリにあるTILのmarkdownコンテンツを管理できる。 メディアも管理可能。
 
@@ -41,8 +41,8 @@ GitHub リポジトリへのフルアクセスが必要になるため、一応C
 
 ドキュメントにやり方が載っているので大体そのまま進めればOK。 Cloudflareのビルド設定だけ記載がないので、フレームワーク プリセットで`Vue`を選択して、ビルドコマンドを`npm run build`、ビルド出力ディレクトリを`/dist`に設定するのを忘れずに。
 
-[https://pagescms.org/docs/development/#deploy-on-cloudflare](https://pagescms.org/docs/development/#deploy-on-cloudflare)
+https://pagescms.org/docs/development/#deploy-on-cloudflare
 
 ## 参考
 
-[https://speakerdeck.com/ikumatadokoro/koredezui-hou-nisitai-astrotoli-tixiang-kau-6du-mu-noge-ren-buroguzai-kai-fa?slide=38](https://speakerdeck.com/ikumatadokoro/koredezui-hou-nisitai-astrotoli-tixiang-kau-6du-mu-noge-ren-buroguzai-kai-fa?slide=38)
+https://speakerdeck.com/ikumatadokoro/koredezui-hou-nisitai-astrotoli-tixiang-kau-6du-mu-noge-ren-buroguzai-kai-fa?slide=38
