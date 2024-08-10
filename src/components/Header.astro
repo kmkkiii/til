@@ -1,6 +1,7 @@
 ---
 import { ModeToggle } from "./ModeToggle";
 import { Button } from "@/components/ui/button";
+import { Rss } from "lucide-react";
 
 ---
 
@@ -8,5 +9,13 @@ import { Button } from "@/components/ui/button";
   <Button variant="ghost">
     <a href="/til" class="font-semibold text-xl">Today I Learned.</a>
   </Button>
-  <ModeToggle client:load />
+
+  <div class="flex items-center gap-2">
+    <ModeToggle client:load />
+    <Button variant="outline" size="icon">
+      <a href="/til/rss.xml">
+        <Rss/>
+      </a>
+    </Button>
+  </div>
 </header>
