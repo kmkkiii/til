@@ -12,7 +12,9 @@ const { title, tags, body } = Astro.props;
 
 const siteUrl = 'https://kmkkiii.github.io/til/';
 const pageTitle = `${title || 'Today I Learned'} | kmkkiii`;
-const description = body || 'その日学んだことを記録するところ';
+const description = body
+											? `${body.slice(0, 120)}...`
+											: 'その日学んだことを記録するところ';
 const ogpImageURL = new URL('/til/kmkkiii.png', new URL(Astro.url.pathname, siteUrl)).href;
 ---
 
