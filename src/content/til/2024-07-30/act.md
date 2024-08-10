@@ -1,6 +1,6 @@
 ---
 title: "ローカルでGitHub Actionsの動作確認ができるactの設定"
-date: "2024-07-30"
+date: 2024-07-30
 tags: ["act", "GitHub Actions"]
 published: true
 ---

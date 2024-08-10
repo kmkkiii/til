@@ -1,6 +1,6 @@
 ---
 title: "コンテナで実行したテストのレポートにホストからアクセスするための設定"
-date: "2024-07-30"
+date: 2024-07-30
 tags: ["Playwright", "Docker"]
 published: true
 ---

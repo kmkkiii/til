@@ -1,6 +1,6 @@
 ---
 title: "脱なんちゃってスクラム(Findyイベント)メモ"
-date: "2024-07-29"
+date: 2024-07-29
 tags: ["Scrum"]
 published: true
 ---

@@ -1,6 +1,6 @@
 ---
 title: "GraphQL Codegenでenumをオブジェクトリテラルで生成する"
-date: "2024-07-17"
+date: 2024-07-17
 tags: ["GraphQL Codegen", "GitHub Actions"]
 published: true
 ---

@@ -1,6 +1,6 @@
 ---
 title: "gitのdiffをdifftasticにする"
-date: "2024-06-10"
+date: 2024-06-10
 tags: ["Git", "difftastic"]
 published: true
 ---

@@ -1,6 +1,6 @@
 ---
 title: "DuckDuckGoでGoogle検索に切り替える方法"
-date: "2024-08-01"
+date: 2024-08-01
 tags: ["DuckDuckGo"]
 published: true
 ---
