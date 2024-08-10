@@ -11,7 +11,7 @@ const { title, tags } = Astro.props;
 
 const siteUrl = "https://kmkkiii.github.io/til";
 const pageTitle = title ? `${title} | Today I Learned` : "Today I Learned";
-const ogpImageURL = new URL("/til/kmkkiii.png", new URL(Astro.url.pathname, siteUrl));
+const ogpImageURL = new URL("/kmkkiii.png", new URL(Astro.url.pathname, siteUrl));
 ---
 
 <!doctype html>
