@@ -3,9 +3,15 @@ content:
     label: Posts
     path: src/content/til
     type: collection
+    filename: "{hour}-{minute}-{second}-{primary}.md"
+    view:
+      fields: [ title, date, tags, published ]
+      primary: title
+      sort: [ date ]
+      default: { sort: date, order: desc }
     fields:
       - { name: title, label: Title, type: string }
-      - { name: date, label: Date, type: string }
+      - { name: date, label: Date, type: date }
       - { name: tags, label: Tags, type: string, list: true }
       - { name: published, label: Published, type: boolean}
       - { name: body, label: Body, type: rich-text }
