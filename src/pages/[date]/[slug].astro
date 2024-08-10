@@ -1,9 +1,9 @@
 ---
-import '../../styles/globals.css'
-import { getAllPosts } from "../../lib/post";
-import lib from "zenn-markdown-html";
-import Layout from "../../layouts/Layout.astro";
-import {Post} from "@/components/Post";
+import '../../styles/globals.css';
+import lib from 'zenn-markdown-html';
+import { getAllPosts } from '../../lib/post';
+import Layout from '../../layouts/Layout.astro';
+import { Post } from '@/components/Post';
 
 type MarkdownOptions = {
   embedOrigin: string;
@@ -13,7 +13,7 @@ type MarkdownHtmlAtBuild = { default: MarkdownHtml };
 
 let markdownHtml: MarkdownHtml = lib;
 
-if (typeof lib !== "function") {
+if (typeof lib !== 'function') {
   markdownHtml = (lib as MarkdownHtmlAtBuild).default;
 }
 
@@ -27,7 +27,7 @@ export interface Props {
 export async function getStaticPaths() {
   const posts = await getAllPosts();
   return posts.map((post) => {
-    const [date, slug] = post.slug.split("/");
+    const [date, slug] = post.slug.split('/');
 
     return {
       params: {
@@ -46,7 +46,7 @@ export async function getStaticPaths() {
 
 const { title, tags, date, body } = Astro.props;
 const html = markdownHtml(body, {
-  embedOrigin: "https://embed.zenn.studio",
+  embedOrigin: 'https://embed.zenn.studio',
 });
 ---
 
@@ -57,7 +57,7 @@ const html = markdownHtml(body, {
       <h1 class="font-bold text-4xl">{title}</h1>
       <div class="flex flex-wrap">
         {
-          tags.map((tag) => (
+          tags.map(tag => (
             <div class="bg-slate-300 dark:bg-slate-500 rounded-full px-3 py-1 text-sm mr-2 mt-2">
               {tag}
             </div>

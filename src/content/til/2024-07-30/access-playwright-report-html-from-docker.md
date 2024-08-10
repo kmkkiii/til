@@ -8,5 +8,5 @@ published: true
 `playwright.config.ts`で以下のとおり設定する
 
 ```ts:playwright.config.ts
-reporter: [['html', { host: '0.0.0.0', port: '9323' }]]
+reporter: [['html', { host: '0.0.0.0', port: '9323' }]];
 ```

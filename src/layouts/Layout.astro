@@ -10,35 +10,35 @@ interface Props {
 
 const { title, tags, body } = Astro.props;
 
-const bodyWithoutNewlines = body?.replace(/\n/g, '')
+const bodyWithoutNewlines = body?.replace(/\n/g, '');
 
-const siteUrl = "https://kmkkiii.github.io/til/";
-const pageTitle = `${title ? title : "Today I Learned"} | kmkkiii`;
+const siteUrl = 'https://kmkkiii.github.io/til/';
+const pageTitle = `${title || 'Today I Learned'} | kmkkiii`;
 const description = (bodyWithoutNewlines && bodyWithoutNewlines?.length > 120)
 											? `${bodyWithoutNewlines?.slice(0, 120 - 4)}...`
-											: "その日学んだことを記録するところ";
-const ogpImageURL = new URL("/til/kmkkiii.png", new URL(Astro.url.pathname, siteUrl)).href;
+											: 'その日学んだことを記録するところ';
+const ogpImageURL = new URL('/til/kmkkiii.png', new URL(Astro.url.pathname, siteUrl)).href;
 ---
 
 <!doctype html>
 
 <script is:inline>
-	const getThemePreference = () => {
-		if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
-			return localStorage.getItem('theme');
-		}
-		return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-	};
-	const isDark = getThemePreference() === 'dark';
-	document.documentElement.classList[isDark ? 'add' : 'remove']('dark');
-
-	if (typeof localStorage !== 'undefined') {
-		const observer = new MutationObserver(() => {
-			const isDark = document.documentElement.classList.contains('dark');
-			localStorage.setItem('theme', isDark ? 'dark' : 'light');
-		});
-		observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+function getThemePreference() {
+	if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+		return localStorage.getItem('theme');
 	}
+	return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+}
+const isDark = getThemePreference() === 'dark';
+document.documentElement.classList[isDark ? 'add' : 'remove']('dark');
+
+if (typeof localStorage !== 'undefined') {
+	const observer = new MutationObserver(() => {
+		const isDark = document.documentElement.classList.contains('dark');
+		localStorage.setItem('theme', isDark ? 'dark' : 'light');
+	});
+	observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+}
 </script>
 
 <html lang="ja">
@@ -54,7 +54,7 @@ const ogpImageURL = new URL("/til/kmkkiii.png", new URL(Astro.url.pathname, site
 
 		<title>{pageTitle}</title>
 		<meta name="author" content="kmkkiii" />
-		<meta name="keywords" content={tags?.join(", ")} />
+		<meta name="keywords" content={tags?.join(', ')} />
 
 		<meta property="og:type" content="article" />
 		<meta property="og:title" content={pageTitle} />
@@ -72,11 +72,11 @@ const ogpImageURL = new URL("/til/kmkkiii.png", new URL(Astro.url.pathname, site
 
 	<body>
 		<div class="p-4">
-			<Header/>
+			<Header />
 			<main class="my-4">
-				<slot/>
+				<slot />
 			</main>
-			<Footer/>
+			<Footer />
 		</div>
 	</body>
 </html>

@@ -1,11 +1,11 @@
 ---
-import type { GetStaticPaths, Page } from "astro";
-import '../styles/globals.css'
+import type { GetStaticPaths, Page } from 'astro';
+import '../styles/globals.css';
 import Layout from '../layouts/Layout.astro';
 
-import { getAllPosts, type Post } from "../lib/post";
-import { Pagination, PaginationContent, PaginationItem, PaginationPrevious, PaginationLink, PaginationEllipsis, PaginationNext } from "@/components/ui/pagination";
-import { PostCard } from "@/components/PostCard";
+import { type Post, getAllPosts } from '../lib/post';
+import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from '@/components/ui/pagination';
+import { PostCard } from '@/components/PostCard';
 
 export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
   const allPosts = await getAllPosts();
