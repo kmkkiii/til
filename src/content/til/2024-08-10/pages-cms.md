@@ -43,6 +43,12 @@ GitHub リポジトリへのフルアクセスが必要になるため、一応C
 
 https://pagescms.org/docs/development/#deploy-on-cloudflare
 
+## 微妙なところ
+
+Pages CMSでmarkdownファイルを編集する際にURLがmarkdown記法のテキストリンクに変換されてしまうこと。
+
+`zenn-markdown-html`を使用しており、リンクは基本的にリンクカード埋め込みにしたい...
+
 ## 参考
 
 https://speakerdeck.com/ikumatadokoro/koredezui-hou-nisitai-astrotoli-tixiang-kau-6du-mu-noge-ren-buroguzai-kai-fa?slide=38
