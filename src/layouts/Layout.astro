@@ -3,14 +3,14 @@ import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 
 interface Props {
-	title: string;
+	title?: string;
 	tags?: string[];
 }
 
 const { title, tags } = Astro.props;
 
 const siteUrl = "https://kmkkiii.github.io";
-const pageTitle = `${title} | til@kmkkiii`;
+const pageTitle = title ? `${title} | Today I Learned` : "Today I Learned";
 const ogpImageURL = new URL("/til/kmkkiii.png", new URL(Astro.url.pathname, siteUrl));
 ---
 
@@ -38,7 +38,7 @@ const ogpImageURL = new URL("/til/kmkkiii.png", new URL(Astro.url.pathname, site
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="description" content="Astro description" />
+		<meta name="description" content={title} />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/vnd.microsoft.icon" href="/til/favicon.ico" />
 
@@ -52,14 +52,15 @@ const ogpImageURL = new URL("/til/kmkkiii.png", new URL(Astro.url.pathname, site
 
 		<meta property="og:type" content="article" />
 		<meta property="og:title" content={pageTitle} />
-		<meta property="og:description" content={tags?.join(", ")} />
+		<meta property="og:description" content={title} />
 		<meta property="og:image" content={ogpImageURL} />
 		<meta property="og:url" content={Astro.url} />
 
 		<!-- twitter -->
-		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:card" content="summary" />
 		<meta name="twitter:image" content={ogpImageURL} />
 		<meta name="twitter:title" content={pageTitle} />
+		<meta name="twitter:description" content={title} />
 		<meta name="twitter:url" content={siteUrl} />
 	</head>
 

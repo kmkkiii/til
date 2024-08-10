@@ -49,31 +49,9 @@ const slug = Astro.params.slug;
 const html = markdownHtml(body, {
   embedOrigin: "https://embed.zenn.studio",
 });
-
-const siteUrl = "https://kmkkiii.github.io";
-
-const canonicalURL = new URL(Astro.url.pathname, siteUrl);
-const ogpImageURL = new URL("/kmkkiii.png", canonicalURL);
 ---
 
-<Layout title={title}>
-  <head>
-    <!-- twitter -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta
-      name="twitter:image"
-      content={ogpImageURL}
-    />
-    <meta name="twitter:title" content={title} />
-    <meta name="twitter:url" content={`${siteUrl}/${slug}`} />
-
-    <meta property="og:url" content={`${siteUrl}/${slug}`} />
-    <meta property="og:title" content={title} />
-    <meta
-      property="og:image"
-      content={ogpImageURL}
-    />
-  </head>
+<Layout title={title} tags={tags}>
   <div class="p-10 max-w-3xl m-auto">
     <div class="pb-5 border-b-2 border-dashed dark:border-slate-500 mb-10">
       <div>{date}</div>
