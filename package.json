@@ -31,5 +31,9 @@
     "typescript": "^5.5.4",
     "zenn-content-css": "^0.1.154",
     "zenn-markdown-html": "^0.1.154"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^2.25.0",
+    "eslint": "^8.57.0"
   }
 }
