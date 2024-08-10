@@ -9,7 +9,7 @@ interface Props {
 
 const { title, tags } = Astro.props;
 
-const siteUrl = "https://kmkkiii.github.io";
+const siteUrl = "https://kmkkiii.github.io/til";
 const pageTitle = title ? `${title} | Today I Learned` : "Today I Learned";
 const ogpImageURL = new URL("/til/kmkkiii.png", new URL(Astro.url.pathname, siteUrl));
 ---
@@ -54,7 +54,7 @@ const ogpImageURL = new URL("/til/kmkkiii.png", new URL(Astro.url.pathname, site
 		<meta property="og:title" content={pageTitle} />
 		<meta property="og:description" content={title} />
 		<meta property="og:image" content={ogpImageURL} />
-		<meta property="og:url" content={Astro.url} />
+		<meta property="og:url" content={siteUrl} />
 
 		<!-- twitter -->
 		<meta name="twitter:card" content="summary" />
