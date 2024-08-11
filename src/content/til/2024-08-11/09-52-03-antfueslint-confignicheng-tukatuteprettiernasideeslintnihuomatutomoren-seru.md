@@ -1,0 +1,36 @@
+---
+title: "@antfu/eslint-configに乗っかってPrettierなしでESLintにフォーマットも任せる"
+date: 2024-08-11
+tags:
+  - ESLint
+published: true
+---
+Biomeはv1.6時点でAstroを部分的にしかサポートしていないためESLintを導入。
+
+https://biomejs.dev/blog/biome-v1-6/
+
+vim-jp slackで知った`@antfu/eslint-config`を使って、ESLintにフォーマットを任せてPrettierは無しでいく。
+
+## 設定
+
+設定は1行で済ませてベストプラクティスに乗っかることもできるし、カスタマイズもできる。
+
+```js:eslint.config.mjs
+import antfu from '@antfu/eslint-config';
+
+export default antfu({
+	stylistic: {
+		semi: true,
+		indent: 'tab',
+	},
+	markdown: true,
+	astro: true,
+	yaml: true,
+});
+```
+
+## auto fix
+
+VSCodeとNeovimがサポートされている。
+
+https://github.com/antfu/eslint-config?tab=readme-ov-file#ide-support-auto-fix-on-save
