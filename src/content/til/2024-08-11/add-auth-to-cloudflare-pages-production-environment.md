@@ -16,10 +16,11 @@ Cloudflare Zero TrustのサイドメニューからAccess > Applicationsにア�
 
 ### ドメイン設定
 
-- Overviewタブを選択するとサブドメインのみが対象になっているため、Add domainでメインドメインを追加してSave application
+*   Overviewタブを選択するとサブドメインのみが対象になっているため、Add domainでメインドメインを追加してSave application
+    
 
 ### ポリシー追加
-    
+
 *   Add a Policyボタンを押してポリシー追加画面へ
     
 *   任意のポリシー名とアクションに`Block`を設定
@@ -29,9 +30,8 @@ Cloudflare Zero TrustのサイドメニューからAccess > Applicationsにア�
     *   今回は`Loging Methods`と`One-time PIN`を指定
         
 *   Add a Policyボタンで追加し、ポリシー一覧画面でSave application
+    
 
+以上の設定でプロダクション環境にアクセスするとCloudflare Zero Trustの認証画面が表示される。 Allow Membersポリシーで設定されているメールアドレスを入力するとPINコードをメールで受け取ることができるので入力してログイン。
 
-以上の設定でプロダクション環境にアクセスするとCloudflare Zero Trustの認証画面が表示される。
-Allow Membersポリシーで設定されているメールアドレスを入力するとPINコードをメールで受け取ることができるので入力してログイン。
-
-プレビュー環境へのアクセスポリシー設定で追加されるALlow Membersが設定されていれば、設定されたメールアドレス以外にはPINコードが送られないようになっている。
+プレビュー環境へのアクセスポリシー設定で追加されるAllow Membersが設定されていれば、設定されたメールアドレス以外にはPINコードが送られないようになっている。
