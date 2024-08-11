@@ -8,4 +8,7 @@ export default antfu({
 	markdown: true,
 	astro: true,
 	yaml: true,
+	ignores: [
+		'.pages.yml',
+	],
 });
