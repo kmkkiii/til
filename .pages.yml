@@ -3,7 +3,7 @@ content:
     label: Posts
     path: src/content/til
     type: collection
-    filename: "{hour}-{minute}-{second}-{primary}.md"
+    filename: "{hour}-{minute}-{second}.md"
     view:
       fields: [title, date, tags, published]
       primary: title
