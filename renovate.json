@@ -12,9 +12,6 @@
 	"major": {
 		"enabled": false
 	},
-	"npm": {
-		"enabled": true
-	},
 	"packageRules": [
 		{
 			"matchUpdateTypes": ["patch", "minor"],
