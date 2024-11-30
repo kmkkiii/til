@@ -12,11 +12,13 @@ export interface Post {
 export async function getAllPosts(): Promise<Post[]> {
   const posts = await getCollection('til');
   return posts
-    .map(post => ({
-      ...post.data,
-      date: formatDate(post.data.date),
-      slug: post.slug,
-      body: post.body,
-    }))
+    .map(post => (
+      {
+        ...post.data,
+        date: formatDate(post.data.date),
+        slug: post.slug,
+        body: post.body,
+      }))
+    .filter(post => post.published)
     .sort((a, z) => new Date(z.date).getTime() - new Date(a.date).getTime());
 }
