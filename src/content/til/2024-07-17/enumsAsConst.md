@@ -10,10 +10,10 @@ graphql-codegen の`enumsAsConst`設定なるものを知った。 非推奨の 
 ```ts
 // オブジェクトリテラル
 const Position = {
-	Top: 0,
-	Right: 1,
-	Bottom: 2,
-	Left: 3,
+  Top: 0,
+  Right: 1,
+  Bottom: 2,
+  Left: 3,
 } as const;
 ```
 

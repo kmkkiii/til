@@ -3,9 +3,9 @@ import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 
 interface Props {
-	title?: string;
-	tags?: string[];
-	body?: string;
+  title?: string;
+  tags?: string[];
+  body?: string;
 }
 
 const { title, tags, body } = Astro.props;
@@ -13,8 +13,8 @@ const { title, tags, body } = Astro.props;
 const siteUrl = 'https://kmkkiii.github.io/til/';
 const pageTitle = `${title || 'Today I Learned'} | kmkkiii`;
 const description = body
-											? `${body.slice(0, 120)}...`
-											: 'その日学んだことを記録するところ';
+                      ? `${body.slice(0, 120)}...`
+                      : 'その日学んだことを記録するところ';
 const ogpImageURL = new URL('/til/kmkkiii.png', new URL(Astro.url.pathname, siteUrl)).href;
 ---
 
@@ -22,59 +22,54 @@ const ogpImageURL = new URL('/til/kmkkiii.png', new URL(Astro.url.pathname, site
 
 <script is:inline>
 function getThemePreference() {
-	if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
-		return localStorage.getItem('theme');
-	}
-	return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+    return localStorage.getItem('theme');
+  }
+  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
 }
 const isDark = getThemePreference() === 'dark';
 document.documentElement.classList[isDark ? 'add' : 'remove']('dark');
 
 if (typeof localStorage !== 'undefined') {
-	const observer = new MutationObserver(() => {
-		const isDark = document.documentElement.classList.contains('dark');
-		localStorage.setItem('theme', isDark ? 'dark' : 'light');
-	});
-	observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+  const observer = new MutationObserver(() => {
+    const isDark = document.documentElement.classList.contains('dark');
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+  });
+  observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
 }
 </script>
 
 <html lang="ja">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="description" content={title} />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/vnd.microsoft.icon" href="/til/favicon.ico" />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={title} />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/vnd.microsoft.icon" href="/til/favicon.ico" />
+    <meta name="generator" content={Astro.generator} />
+      <script src="https://embed.zenn.studio/js/listen-embed-event.js" is:inline></script>
+    <title>{pageTitle}</title>
+    <meta name="author" content="kmkkiii" />
+    <meta name="keywords" content={tags?.join(', ')} />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogpImageURL} />
+    <meta property="og:url" content={siteUrl} />
+    <!-- twitter -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:image" content={ogpImageURL} />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:url" content={siteUrl} />
+  </head>
 
-		<meta name="generator" content={Astro.generator} />
-
-    <script src="https://embed.zenn.studio/js/listen-embed-event.js" is:inline></script>
-
-		<title>{pageTitle}</title>
-		<meta name="author" content="kmkkiii" />
-		<meta name="keywords" content={tags?.join(', ')} />
-
-		<meta property="og:type" content="article" />
-		<meta property="og:title" content={pageTitle} />
-		<meta property="og:description" content={description} />
-		<meta property="og:image" content={ogpImageURL} />
-		<meta property="og:url" content={siteUrl} />
-
-		<!-- twitter -->
-		<meta name="twitter:card" content="summary" />
-		<meta name="twitter:image" content={ogpImageURL} />
-		<meta name="twitter:title" content={pageTitle} />
-		<meta name="twitter:description" content={description} />
-		<meta name="twitter:url" content={siteUrl} />
-	</head>
-
-	<body>
-		<div class="p-4">
-			<Header />
-			<main class="my-4">
-				<slot />
-			</main>
-			<Footer />
-		</div>
-	</body>
+  <body>
+    <div class="p-4">
+      <Header />
+      <main class="my-4">
+        <slot />
+      </main>
+      <Footer />
+    </div>
+  </body>
 </html>

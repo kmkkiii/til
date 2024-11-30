@@ -5,12 +5,12 @@ import react from '@astrojs/react';
 
 // https://astro.build/config
 export default defineConfig({
-	integrations: [
-		tailwind({
-			applyBaseStyles: false,
-		}),
-		react(),
-	],
-	site: 'https://kmkkiii.github.io',
-	base: '/til',
+  integrations: [
+    tailwind({
+      applyBaseStyles: false,
+    }),
+    react(),
+  ],
+  site: 'https://kmkkiii.github.io',
+  base: '/til',
 });

@@ -19,27 +19,27 @@ const { page } = Astro.props as { page: Page<Post> };
 ---
 
 <Layout>
-	{ page.data.map(post => <PostCard post={post} />) }
-	<Pagination>
-		<PaginationContent>
-			<PaginationItem hidden={!page.url.prev}>
-				<PaginationPrevious href={`/til${page.url.prev}`} />
-			</PaginationItem>
-			<PaginationItem hidden={!page.url.prev}>
-				<PaginationLink href={`/til${page.url.prev}`}>{page.currentPage - 1}</PaginationLink>
-			</PaginationItem>
-			<PaginationItem>
-				<PaginationLink isActive>{page.currentPage}</PaginationLink>
-			</PaginationItem>
-			<PaginationItem hidden={!page.url.next}>
-				<PaginationLink href={`/til${page.url.next}`}>{page.currentPage + 1}</PaginationLink>
-			</PaginationItem>
-			<PaginationItem hidden={page.currentPage + 1 <= page.total}>
-				<PaginationEllipsis />
-			</PaginationItem>
-			<PaginationItem hidden={!page.url.next}>
-				<PaginationNext href={`/til${page.url.next}`} />
-			</PaginationItem>
-		</PaginationContent>
-	</Pagination>
+  { page.data.map(post => <PostCard post={post} />) }
+  <Pagination>
+    <PaginationContent>
+      <PaginationItem hidden={!page.url.prev}>
+        <PaginationPrevious href={`/til${page.url.prev}`} />
+      </PaginationItem>
+      <PaginationItem hidden={!page.url.prev}>
+        <PaginationLink href={`/til${page.url.prev}`}>{page.currentPage - 1}</PaginationLink>
+      </PaginationItem>
+      <PaginationItem>
+        <PaginationLink isActive>{page.currentPage}</PaginationLink>
+      </PaginationItem>
+      <PaginationItem hidden={!page.url.next}>
+        <PaginationLink href={`/til${page.url.next}`}>{page.currentPage + 1}</PaginationLink>
+      </PaginationItem>
+      <PaginationItem hidden={page.currentPage + 1 <= page.total}>
+        <PaginationEllipsis />
+      </PaginationItem>
+      <PaginationItem hidden={!page.url.next}>
+        <PaginationNext href={`/til${page.url.next}`} />
+      </PaginationItem>
+    </PaginationContent>
+  </Pagination>
 </Layout>

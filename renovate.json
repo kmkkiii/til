@@ -1,22 +1,22 @@
 {
-	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
-	"extends": [
-		"config:base",
-		":timezone(Asia/Tokyo)",
-		":automergePatch",
-		":prHourlyLimitNone"
-	],
-	"dependencyDashboard": false,
-	"requiredStatusChecks": null,
-	"schedule": ["after 9am on monday", "before 12am on monday"],
-	"major": {
-		"enabled": false
-	},
-	"packageRules": [
-		{
-			"matchUpdateTypes": ["patch", "minor"],
-			"excludePackageNames": ["typescript"],
-			"groupName": "minor and patch dependencies"
-		}
-	]
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:base",
+    ":timezone(Asia/Tokyo)",
+    ":automergePatch",
+    ":prHourlyLimitNone"
+  ],
+  "dependencyDashboard": false,
+  "requiredStatusChecks": null,
+  "schedule": ["after 9am on monday", "before 12am on monday"],
+  "major": {
+    "enabled": false
+  },
+  "packageRules": [
+    {
+      "matchUpdateTypes": ["patch", "minor"],
+      "excludePackageNames": ["typescript"],
+      "groupName": "minor and patch dependencies"
+    }
+  ]
 }
