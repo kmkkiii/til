@@ -69,6 +69,6 @@
 }
 
 :where(header, footer, main, aside) {
-  max-width: 40ic;
+  max-width: 50ic;
   margin-inline: auto;
 }
