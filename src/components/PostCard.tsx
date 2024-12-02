@@ -17,10 +17,11 @@ export function PostCard({ post }: Props) {
         <CardHeader>
           <CardTitle className="text-md">{post.title}</CardTitle>
           <CardDescription>
-            <div className="flex items-center">
-              <div className="text-xs mr-2">{post.date}</div>
+            <div className="text-xs my-2">{post.date}</div>
+            <div className="flex flex-wrap">
+
               {post.tags.map(tag => (
-                <div className="bg-slate-300 dark:bg-slate-500 rounded-full text-xs mx-1 py-1 px-2">
+                <div className="bg-slate-300 dark:bg-slate-500 rounded-xl text-xs py-1 px-2 mr-1 mt-2">
                   {tag}
                 </div>
               ))}
