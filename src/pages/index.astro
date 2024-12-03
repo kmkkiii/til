@@ -9,12 +9,14 @@ const posts = await getAllPosts();
 ---
 
 <Layout>
-  <>
+  <div>
     { posts.slice(0, 5).map(post => <PostCard post={post} />) }
     <div class="flex justify-center my-4">
-      <Button>
-        <a href="/til/2">Read more</a>
-      </Button>
+      <a href="/til/2">
+        <Button>
+          Read more
+        </Button>
+      </a>
     </div>
-  </>
+  </div>
 </Layout>
