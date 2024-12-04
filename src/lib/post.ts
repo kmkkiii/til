@@ -2,11 +2,12 @@ import { getCollection } from 'astro:content';
 import { formatDate } from './utils';
 
 export interface Post {
+  id: string;
   title: string;
   tags: string[];
   date: string;
-  slug: string;
-  body: string;
+  body: string | undefined;
+  published: boolean;
 }
 
 export async function getAllPosts(): Promise<Post[]> {
@@ -15,8 +16,8 @@ export async function getAllPosts(): Promise<Post[]> {
     .map(post => (
       {
         ...post.data,
+        id: post.id,
         date: formatDate(post.data.date),
-        slug: post.slug,
         body: post.body,
       }))
     .filter(post => post.published)

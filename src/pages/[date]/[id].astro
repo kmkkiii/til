@@ -27,12 +27,12 @@ export interface Props {
 export async function getStaticPaths() {
   const posts = await getAllPosts();
   return posts.map((post) => {
-    const [date, slug] = post.slug.split('/');
+    const [date, id] = post.id.split('/');
 
     return {
       params: {
         date,
-        slug,
+        id,
       },
       props: {
         title: post.title,
