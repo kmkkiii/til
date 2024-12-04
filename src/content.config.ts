@@ -1,8 +1,8 @@
 import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
 
-const tilCollection = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './til' }),
+const til = defineCollection({
+  loader: glob({ pattern: '**\/[^_]*.md', base: './src/content/til' }),
   schema: z.object({
     title: z.string(),
     tags: z.array(z.string()),
@@ -11,6 +11,4 @@ const tilCollection = defineCollection({
   }),
 });
 
-export const collections = {
-  til: tilCollection,
-};
+export const collections = { til };
