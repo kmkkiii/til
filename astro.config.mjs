@@ -13,4 +13,12 @@ export default defineConfig({
   ],
   site: 'https://kmkkiii.github.io',
   base: '/til',
+  image: {
+    // Used for all `<Image />` and `<Picture />` components unless overridden
+    experimentalLayout: 'responsive',
+  },
+  experimental: {
+    responsiveImages: true,
+    svg: true,
+  },
 });
