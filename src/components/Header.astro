@@ -6,16 +6,18 @@ import { Button } from '@/components/ui/button';
 ---
 
 <header class="flex justify-between items-center mt-2">
-  <Button variant="ghost">
-    <a href="/til" class="font-semibold text-xl">Today I Learned.</a>
-  </Button>
+  <a href="/til">
+    <Button variant="ghost">
+      <div class="font-semibold text-xl">Today I Learned.</div>
+    </Button>
+  </a>
 
   <div class="flex items-center gap-2">
     <ModeToggle client:load />
-    <Button variant="outline" size="icon">
-      <a href="/til/rss.xml">
+    <a href="/til/rss.xml">
+      <Button variant="outline" size="icon">
         <Rss />
-      </a>
-    </Button>
+      </Button>
+    </a>
   </div>
 </header>
