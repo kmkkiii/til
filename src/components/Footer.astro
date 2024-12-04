@@ -1,4 +1,10 @@
 ---
+import GitHubIcon from 'public/icons/github-brands-solid.svg';
+import XIcon from 'public/icons/x-logo.svg';
+import qiitaIcon from 'public/icons/qiita-icon.png';
+import ZennIcon from 'public/icons/zenn-logo-only.svg';
+import BlueskyIcon from 'public/icons/bluesky_media_kit_logo_svgs.svg';
+import { Image } from 'astro:assets';
 import { Separator } from '@/components/ui/separator';
 import { Button } from '@/components/ui/button';
 ---
@@ -7,19 +13,23 @@ import { Button } from '@/components/ui/button';
   <div>
     <div class="flex justify-center h-5 m-4 items-center space-x-4 text-sm">
       <Button variant="link">
-        <a href="https://github.com/kmkkiii" target="_blank">GitHub</a>
+        <a href="https://github.com/kmkkiii" target="_blank"><GitHubIcon width={30} height={28} /></a>
       </Button>
       <Separator orientation="vertical" />
       <Button variant="link">
-        <a href="https://x.com/kmkkiii" target="_blank">X</a>
+        <a href="https://x.com/kmkkiii" target="_blank"><XIcon width={18} height={18} /></a>
       </Button>
       <Separator orientation="vertical" />
       <Button variant="link">
-        <a href="https://qiita.com/kmkkiii" target="_blank">Qiita</a>
+        <a href="https://bsky.app/profile/kmkkiii.github.io" target="_blank"><BlueskyIcon width={34} height={34} /></a>
       </Button>
       <Separator orientation="vertical" />
       <Button variant="link">
-        <a href="https://zenn.dev/kmkkiii" target="_blank">Zenn</a>
+        <a href="https://qiita.com/kmkkiii" target="_blank"><Image src={qiitaIcon} alt="Qiitaプロフィールページへのリンクアイコン" width={24} height={24} /></a>
+      </Button>
+      <Separator orientation="vertical" />
+      <Button variant="link">
+        <a href="https://zenn.dev/kmkkiii" target="_blank"><ZennIcon width={20} height={20} /></a>
       </Button>
     </div>
     <Separator className="my-4" />
