@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://kmkkiii.github.io/til/sitemap-index.xml
