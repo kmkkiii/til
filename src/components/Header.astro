@@ -5,13 +5,12 @@ import { Button } from '@/components/ui/button';
 
 ---
 
-<header class="flex justify-between items-center mt-2">
+<header class="fixed top-0 left-0 right-0 z-50 flex justify-between items-center py-2 px-4 backdrop-blur-md bg-background/20">
   <a href="/til">
     <Button variant="ghost">
       <div class="font-semibold text-xl">Today I Learned.</div>
     </Button>
   </a>
-
   <div class="flex items-center gap-2">
     <ModeToggle client:load />
     <a href="/til/rss.xml">
