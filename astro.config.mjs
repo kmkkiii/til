@@ -14,7 +14,7 @@ export default defineConfig({
   base: '/til',
   image: {
     // Used for all `<Image />` and `<Picture />` components unless overridden
-    experimentalLayout: 'responsive',
+    experimentalLayout: 'constrained',
   },
   experimental: {
     responsiveImages: true,
