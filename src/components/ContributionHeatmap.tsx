@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import type { Post } from '../lib/post';
 
 interface ContributionHeatmapProps {
@@ -12,6 +12,7 @@ interface DayData {
 }
 
 export function ContributionHeatmap({ posts }: ContributionHeatmapProps) {
+  const [hoveredDay, setHoveredDay] = useState<{ x: number; y: number; date: string; count: number } | null>(null);
   const generateHeatmapData = (): DayData[] => {
     const endDate = new Date();
     const startDate = new Date();
@@ -72,8 +73,17 @@ export function ContributionHeatmap({ posts }: ContributionHeatmapProps) {
   const monthLabels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
   const dayLabels = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
+  const formatDate = (dateStr: string): string => {
+    const date = new Date(dateStr);
+    return date.toLocaleDateString('ja-JP', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+  };
+
   return (
-    <div className="contribution-heatmap w-full max-w-4xl mx-auto p-4">
+    <div className="contribution-heatmap w-full max-w-4xl mx-auto p-4 relative">
       <h2 className="text-lg font-semibold mb-4 text-gray-900 dark:text-gray-100">
         投稿活動
       </h2>
@@ -90,13 +100,13 @@ export function ContributionHeatmap({ posts }: ContributionHeatmapProps) {
                   return (
                     <div 
                       key={weekIndex} 
-                      className="text-xs text-gray-600 dark:text-gray-400 w-4 text-center"
+                      className="text-xs text-gray-600 dark:text-gray-400 w-3 text-center"
                     >
                       {monthLabels[firstDay.getMonth()]}
                     </div>
                   );
                 }
-                return <div key={weekIndex} className="w-4"></div>;
+                return <div key={weekIndex} className="w-3"></div>;
               })}
             </div>
 
@@ -107,7 +117,7 @@ export function ContributionHeatmap({ posts }: ContributionHeatmapProps) {
                 {dayLabels.map((label, index) => (
                   <div 
                     key={label} 
-                    className="text-xs text-gray-600 dark:text-gray-400 w-8 h-4 flex items-center"
+                    className="text-xs text-gray-600 dark:text-gray-400 w-8 h-3 flex items-center"
                   >
                     {index % 2 === 1 ? label : ''}
                   </div>
@@ -124,7 +134,7 @@ export function ContributionHeatmap({ posts }: ContributionHeatmapProps) {
                         return (
                           <div 
                             key={`empty-${dayIndex}`} 
-                            className="w-4 h-4"
+                            className="w-3 h-3"
                           />
                         );
                       }
@@ -132,8 +142,17 @@ export function ContributionHeatmap({ posts }: ContributionHeatmapProps) {
                       return (
                         <div
                           key={dayData.date}
-                          className={`w-4 h-4 rounded-[1px] ${getColorClass(dayData.level)} border-[0.5px] border-gray-200 dark:border-gray-600`}
-                          title={`${dayData.date}: ${dayData.count} posts`}
+                          className={`w-3 h-3 rounded-sm ${getColorClass(dayData.level)} border-[0.5px] border-gray-200 dark:border-gray-600 cursor-pointer transition-all hover:scale-110 hover:shadow-md`}
+                          onMouseEnter={(e) => {
+                            const rect = e.currentTarget.getBoundingClientRect();
+                            setHoveredDay({
+                              x: rect.left + rect.width / 2,
+                              y: rect.top - 10,
+                              date: dayData.date,
+                              count: dayData.count
+                            });
+                          }}
+                          onMouseLeave={() => setHoveredDay(null)}
                         />
                       );
                     })}
@@ -153,7 +172,7 @@ export function ContributionHeatmap({ posts }: ContributionHeatmapProps) {
               {[0, 1, 2, 3, 4].map(level => (
                 <div
                   key={level}
-                  className={`w-4 h-4 rounded-[1px] ${getColorClass(level)} border-[0.5px] border-gray-200 dark:border-gray-600`}
+                  className={`w-3 h-3 rounded-sm ${getColorClass(level)} border-[0.5px] border-gray-200 dark:border-gray-600`}
                 />
               ))}
             </div>
@@ -161,6 +180,25 @@ export function ContributionHeatmap({ posts }: ContributionHeatmapProps) {
           </div>
         </div>
       </div>
+
+      {/* Popover */}
+      {hoveredDay && (
+        <div
+          className="fixed z-50 px-3 py-2 text-sm text-white bg-gray-900 dark:bg-gray-800 rounded-lg shadow-lg pointer-events-none transform -translate-x-1/2 -translate-y-full"
+          style={{
+            left: hoveredDay.x,
+            top: hoveredDay.y,
+          }}
+        >
+          <div className="font-medium">{formatDate(hoveredDay.date)}</div>
+          <div className="text-gray-200 dark:text-gray-300">
+            {hoveredDay.count === 0 ? '投稿なし' : `${hoveredDay.count}件の投稿`}
+          </div>
+          <div 
+            className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-900 dark:border-t-gray-800"
+          />
+        </div>
+      )}
     </div>
   );
 }
