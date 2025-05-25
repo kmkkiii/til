@@ -90,13 +90,13 @@ export function ContributionHeatmap({ posts }: ContributionHeatmapProps) {
                   return (
                     <div 
                       key={weekIndex} 
-                      className="text-xs text-gray-600 dark:text-gray-400 w-3 text-center"
+                      className="text-xs text-gray-600 dark:text-gray-400 w-4 text-center"
                     >
                       {monthLabels[firstDay.getMonth()]}
                     </div>
                   );
                 }
-                return <div key={weekIndex} className="w-3"></div>;
+                return <div key={weekIndex} className="w-4"></div>;
               })}
             </div>
 
@@ -107,7 +107,7 @@ export function ContributionHeatmap({ posts }: ContributionHeatmapProps) {
                 {dayLabels.map((label, index) => (
                   <div 
                     key={label} 
-                    className="text-xs text-gray-600 dark:text-gray-400 w-8 h-3 flex items-center"
+                    className="text-xs text-gray-600 dark:text-gray-400 w-8 h-4 flex items-center"
                   >
                     {index % 2 === 1 ? label : ''}
                   </div>
@@ -124,7 +124,7 @@ export function ContributionHeatmap({ posts }: ContributionHeatmapProps) {
                         return (
                           <div 
                             key={`empty-${dayIndex}`} 
-                            className="w-3 h-3"
+                            className="w-4 h-4"
                           />
                         );
                       }
@@ -132,7 +132,7 @@ export function ContributionHeatmap({ posts }: ContributionHeatmapProps) {
                       return (
                         <div
                           key={dayData.date}
-                          className={`w-3 h-3 rounded-sm ${getColorClass(dayData.level)} border border-gray-200 dark:border-gray-600`}
+                          className={`w-4 h-4 rounded-[1px] ${getColorClass(dayData.level)} border-[0.5px] border-gray-200 dark:border-gray-600`}
                           title={`${dayData.date}: ${dayData.count} posts`}
                         />
                       );
@@ -153,7 +153,7 @@ export function ContributionHeatmap({ posts }: ContributionHeatmapProps) {
               {[0, 1, 2, 3, 4].map(level => (
                 <div
                   key={level}
-                  className={`w-3 h-3 rounded-sm ${getColorClass(level)} border border-gray-200 dark:border-gray-600`}
+                  className={`w-4 h-4 rounded-[1px] ${getColorClass(level)} border-[0.5px] border-gray-200 dark:border-gray-600`}
                 />
               ))}
             </div>
