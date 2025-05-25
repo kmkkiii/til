@@ -142,7 +142,7 @@ export function ContributionHeatmap({ posts }: ContributionHeatmapProps) {
                       return (
                         <div
                           key={dayData.date}
-                          className={`w-3 h-3 rounded-sm ${getColorClass(dayData.level)} border-[0.5px] border-gray-200 dark:border-gray-600 cursor-pointer transition-all hover:scale-110 hover:shadow-md`}
+                          className={`w-3 h-3 rounded-[2px] ${getColorClass(dayData.level)} border-[0.5px] border-gray-300 dark:border-gray-700 cursor-pointer transition-all hover:scale-110 hover:shadow-md`}
                           onMouseEnter={(e) => {
                             const rect = e.currentTarget.getBoundingClientRect();
                             setHoveredDay({
@@ -172,7 +172,7 @@ export function ContributionHeatmap({ posts }: ContributionHeatmapProps) {
               {[0, 1, 2, 3, 4].map(level => (
                 <div
                   key={level}
-                  className={`w-3 h-3 rounded-sm ${getColorClass(level)} border-[0.5px] border-gray-200 dark:border-gray-600`}
+                  className={`w-3 h-3 rounded-[2px] ${getColorClass(level)} border-[0.5px] border-gray-300 dark:border-gray-700`}
                 />
               ))}
             </div>
