@@ -13,9 +13,20 @@ interface DayData {
 
 export function ContributionHeatmap({ posts }: ContributionHeatmapProps) {
   const [hoveredDay, setHoveredDay] = useState<{ x: number; y: number; date: string; count: number } | null>(null);
+
+  // JSTの日付文字列を取得するヘルパー関数
+  const getJSTDateString = (date: Date): string => {
+    const jstDate = new Date(date.getTime() + (9 * 60 * 60 * 1000)); // UTC+9時間
+    return jstDate.toISOString().split('T')[0];
+  };
+
   const generateHeatmapData = (): DayData[] => {
-    const endDate = new Date();
-    const startDate = new Date();
+    // JST基準での現在日時
+    const now = new Date();
+    const jstNow = new Date(now.getTime() + (9 * 60 * 60 * 1000));
+    const endDate = new Date(jstNow.getFullYear(), jstNow.getMonth(), jstNow.getDate());
+
+    const startDate = new Date(endDate);
     startDate.setFullYear(endDate.getFullYear() - 1);
 
     const postCounts = new Map<string, number>();
@@ -29,7 +40,7 @@ export function ContributionHeatmap({ posts }: ContributionHeatmapProps) {
     let currentDate = new Date(startDate);
 
     while (currentDate <= endDate) {
-      const dateStr = currentDate.toISOString().split('T')[0];
+      const dateStr = getJSTDateString(currentDate);
       const count = postCounts.get(dateStr) || 0;
 
       let level = 0;
@@ -117,7 +128,7 @@ export function ContributionHeatmap({ posts }: ContributionHeatmapProps) {
   const monthLabelPositions = getMonthLabels();
 
   return (
-    <div className="contribution-heatmap w-full mx-auto p-4 relative">
+    <div className="contribution-heatmap w-full mx-auto relative">
       <div className="bg-white dark:bg-gray-900 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
         <div className="w-full overflow-x-auto">
           <div className="flex flex-col gap-1">
@@ -130,7 +141,7 @@ export function ContributionHeatmap({ posts }: ContributionHeatmapProps) {
                   return (
                     <div
                       key={weekIndex}
-                      className="flex-1 text-left min-w-[6.75px]"
+                      className="flex-1 text-left min-w-[9.35px]"
                     >
                       <span className="text-xs text-gray-600 dark:text-gray-400">
                         {monthLabel ? monthLabel.month : ''}
@@ -165,7 +176,7 @@ export function ContributionHeatmap({ posts }: ContributionHeatmapProps) {
                         return (
                           <div
                             key={`empty-${dayIndex}`}
-                            className="w-full h-3 min-w-[10px]"
+                            className="w-full h-3 min-w-3"
                           />
                         );
                       }
@@ -173,7 +184,7 @@ export function ContributionHeatmap({ posts }: ContributionHeatmapProps) {
                       return (
                         <div
                           key={dayData.date}
-                          className={`w-full h-3 min-w-[10px] rounded-[2px] ${getColorClass(dayData.level)} border-[0.5px] border-gray-300 dark:border-gray-700 cursor-pointer transition-all hover:scale-110 hover:shadow-md`}
+                          className={`w-full h-3 min-w-3 rounded-[2px] ${getColorClass(dayData.level)} border-[0.5px] border-gray-300 dark:border-gray-700 cursor-pointer transition-all hover:scale-110 hover:shadow-md`}
                           onMouseEnter={(e) => {
                             const rect = e.currentTarget.getBoundingClientRect();
                             setHoveredDay({
