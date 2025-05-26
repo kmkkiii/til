@@ -29,6 +29,12 @@ export function ContributionHeatmap({ posts }: ContributionHeatmapProps) {
     const startDate = new Date(endDate);
     startDate.setFullYear(endDate.getFullYear() - 1);
 
+    // startDateをその週の日曜日に調整
+    const dayOfWeek = startDate.getDay(); // 0 (Sun) - 6 (Sat)
+    if (dayOfWeek !== 0) { // 日曜日でない場合のみ調整
+      startDate.setDate(startDate.getDate() - dayOfWeek);
+    }
+
     const postCounts = new Map<string, number>();
 
     posts.forEach((post) => {
