@@ -19,41 +19,47 @@ export function ContributionHeatmap({ posts }: ContributionHeatmapProps) {
     startDate.setFullYear(endDate.getFullYear() - 1);
 
     const postCounts = new Map<string, number>();
-    
-    posts.forEach(post => {
+
+    posts.forEach((post) => {
       const dateStr = post.date;
       postCounts.set(dateStr, (postCounts.get(dateStr) || 0) + 1);
     });
 
     const data: DayData[] = [];
-    const currentDate = new Date(startDate);
-    
+    let currentDate = new Date(startDate);
+
     while (currentDate <= endDate) {
       const dateStr = currentDate.toISOString().split('T')[0];
       const count = postCounts.get(dateStr) || 0;
-      
+
       let level = 0;
       if (count > 0) {
-        if (count === 1) level = 1;
-        else if (count === 2) level = 2;
-        else if (count <= 4) level = 3;
+        if (count === 1)
+          level = 1;
+        else if (count === 2)
+          level = 2;
+        else if (count <= 4)
+          level = 3;
         else level = 4;
       }
-      
+
       data.push({
         date: dateStr,
         count,
-        level
+        level,
       });
-      
-      currentDate.setDate(currentDate.getDate() + 1);
+
+      // Move to next day
+      const nextDate = new Date(currentDate);
+      nextDate.setDate(nextDate.getDate() + 1);
+      currentDate = nextDate;
     }
-    
+
     return data;
   };
 
   const heatmapData = generateHeatmapData();
-  
+
   const getColorClass = (level: number): string => {
     switch (level) {
       case 0: return 'bg-gray-100 dark:bg-gray-800';
@@ -78,32 +84,33 @@ export function ContributionHeatmap({ posts }: ContributionHeatmapProps) {
     return date.toLocaleDateString('ja-JP', {
       year: 'numeric',
       month: 'long',
-      day: 'numeric'
+      day: 'numeric',
     });
   };
 
   // Generate month labels aligned with month start columns
   const getMonthLabels = () => {
     const labels: { weekIndex: number; month: string }[] = [];
-    let currentMonth = -1;
-    
+    let lastAddedMonth = -1; // 最後にラベルを追加した月
+
     weeks.forEach((week, weekIndex) => {
-      if (week[0]) {
-        const firstDay = new Date(week[0].date);
-        const month = firstDay.getMonth();
-        
-        // Check if this is the first week of a new month
-        if (month !== currentMonth) {
-          // Only add label if it's the first day of the month or close to it
-          const dayOfMonth = firstDay.getDate();
-          if (dayOfMonth <= 7) { // First week of month
+      // この週に、まだラベル付けされていない新しい月の1日が含まれているか探す
+      for (const dayData of week) {
+        if (dayData) {
+          const currentDate = new Date(dayData.date);
+          const dayOfMonth = currentDate.getDate();
+          const month = currentDate.getMonth();
+
+          if (dayOfMonth === 1 && month !== lastAddedMonth) {
             labels.push({ weekIndex, month: monthLabels[month] });
-            currentMonth = month;
+            lastAddedMonth = month;
+            // この週で該当する最初の新しい月の1日を見つけたら、
+            // この週に対するラベル付けは完了とし、次の週の処理に移る
+            break;
           }
         }
       }
     });
-    
     return labels;
   };
 
@@ -115,13 +122,13 @@ export function ContributionHeatmap({ posts }: ContributionHeatmapProps) {
         <div className="w-full">
           <div className="flex flex-col gap-1">
             {/* Month labels */}
-            <div className="flex gap-[3px] mb-2">
+            <div className="flex mb-2">
               <div className="w-8"></div>
-              {weeks.map((week, weekIndex) => {
+              {weeks.map((_, weekIndex) => {
                 const monthLabel = monthLabelPositions.find(label => label.weekIndex === weekIndex);
                 return (
-                  <div 
-                    key={weekIndex} 
+                  <div
+                    key={weekIndex}
                     className="text-xs text-gray-600 dark:text-gray-400 flex-1 text-left min-w-[12px]"
                   >
                     {monthLabel ? monthLabel.month : ''}
@@ -135,8 +142,8 @@ export function ContributionHeatmap({ posts }: ContributionHeatmapProps) {
               {/* Day labels */}
               <div className="flex flex-col gap-[3px]">
                 {dayLabels.map((label, index) => (
-                  <div 
-                    key={label} 
+                  <div
+                    key={label}
                     className="text-xs text-gray-600 dark:text-gray-400 w-8 h-3 flex items-center"
                   >
                     {index % 2 === 1 ? label : ''}
@@ -152,13 +159,13 @@ export function ContributionHeatmap({ posts }: ContributionHeatmapProps) {
                       const dayData = week[dayIndex];
                       if (!dayData) {
                         return (
-                          <div 
-                            key={`empty-${dayIndex}`} 
+                          <div
+                            key={`empty-${dayIndex}`}
                             className="w-full h-3 min-w-[10px]"
                           />
                         );
                       }
-                      
+
                       return (
                         <div
                           key={dayData.date}
@@ -169,7 +176,7 @@ export function ContributionHeatmap({ posts }: ContributionHeatmapProps) {
                               x: rect.left + rect.width / 2,
                               y: rect.top - 10,
                               date: dayData.date,
-                              count: dayData.count
+                              count: dayData.count,
                             });
                           }}
                           onMouseLeave={() => setHoveredDay(null)}
@@ -213,7 +220,7 @@ export function ContributionHeatmap({ posts }: ContributionHeatmapProps) {
           <div className="text-gray-200 dark:text-gray-300">
             {hoveredDay.count === 0 ? '投稿なし' : `${hoveredDay.count}件の投稿`}
           </div>
-          <div 
+          <div
             className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-900 dark:border-t-gray-800"
           />
         </div>
