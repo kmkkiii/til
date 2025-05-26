@@ -115,14 +115,14 @@ export function ContributionHeatmap({ posts }: ContributionHeatmapProps) {
         <div className="w-full">
           <div className="flex flex-col gap-1">
             {/* Month labels */}
-            <div className="flex gap-[2px] mb-2">
+            <div className="flex gap-[3px] mb-2">
               <div className="w-8"></div>
               {weeks.map((week, weekIndex) => {
                 const monthLabel = monthLabelPositions.find(label => label.weekIndex === weekIndex);
                 return (
                   <div 
                     key={weekIndex} 
-                    className="text-xs text-gray-600 dark:text-gray-400 flex-1 text-center min-w-[12px]"
+                    className="text-xs text-gray-600 dark:text-gray-400 flex-1 text-left min-w-[12px]"
                   >
                     {monthLabel ? monthLabel.month : ''}
                   </div>
@@ -131,9 +131,9 @@ export function ContributionHeatmap({ posts }: ContributionHeatmapProps) {
             </div>
 
             {/* Day labels and grid */}
-            <div className="flex gap-[2px]">
+            <div className="flex gap-[3px]">
               {/* Day labels */}
-              <div className="flex flex-col gap-[2px]">
+              <div className="flex flex-col gap-[3px]">
                 {dayLabels.map((label, index) => (
                   <div 
                     key={label} 
@@ -145,9 +145,9 @@ export function ContributionHeatmap({ posts }: ContributionHeatmapProps) {
               </div>
 
               {/* Heatmap grid */}
-              <div className="flex gap-[2px] flex-1">
+              <div className="flex gap-[3px] flex-1">
                 {weeks.map((week, weekIndex) => (
-                  <div key={weekIndex} className="flex flex-col gap-[2px] flex-1">
+                  <div key={weekIndex} className="flex flex-col gap-[3px] flex-1">
                     {Array.from({ length: 7 }, (_, dayIndex) => {
                       const dayData = week[dayIndex];
                       if (!dayData) {
