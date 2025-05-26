@@ -119,22 +119,26 @@ export function ContributionHeatmap({ posts }: ContributionHeatmapProps) {
   return (
     <div className="contribution-heatmap w-full mx-auto p-4 relative">
       <div className="bg-white dark:bg-gray-900 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
-        <div className="w-full">
+        <div className="w-full overflow-x-auto">
           <div className="flex flex-col gap-1">
             {/* Month labels */}
-            <div className="flex mb-2">
-              <div className="w-8"></div>
-              {weeks.map((_, weekIndex) => {
-                const monthLabel = monthLabelPositions.find(label => label.weekIndex === weekIndex);
-                return (
-                  <div
-                    key={weekIndex}
-                    className="text-xs text-gray-600 dark:text-gray-400 flex-1 text-left min-w-[12px]"
-                  >
-                    {monthLabel ? monthLabel.month : ''}
-                  </div>
-                );
-              })}
+            <div className="flex gap-[3px]">
+              <div className="w-8 shrink-0"></div>
+              <div className="flex gap-[3px] flex-1">
+                {weeks.map((_, weekIndex) => {
+                  const monthLabel = monthLabelPositions.find(label => label.weekIndex === weekIndex);
+                  return (
+                    <div
+                      key={weekIndex}
+                      className="flex-1 text-left min-w-[6.75px]"
+                    >
+                      <span className="text-xs text-gray-600 dark:text-gray-400">
+                        {monthLabel ? monthLabel.month : ''}
+                      </span>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
 
             {/* Day labels and grid */}
