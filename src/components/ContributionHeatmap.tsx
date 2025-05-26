@@ -82,38 +82,58 @@ export function ContributionHeatmap({ posts }: ContributionHeatmapProps) {
     });
   };
 
+  // Generate month labels aligned with month start columns
+  const getMonthLabels = () => {
+    const labels: { weekIndex: number; month: string }[] = [];
+    let currentMonth = -1;
+    
+    weeks.forEach((week, weekIndex) => {
+      if (week[0]) {
+        const firstDay = new Date(week[0].date);
+        const month = firstDay.getMonth();
+        
+        // Check if this is the first week of a new month
+        if (month !== currentMonth) {
+          // Only add label if it's the first day of the month or close to it
+          const dayOfMonth = firstDay.getDate();
+          if (dayOfMonth <= 7) { // First week of month
+            labels.push({ weekIndex, month: monthLabels[month] });
+            currentMonth = month;
+          }
+        }
+      }
+    });
+    
+    return labels;
+  };
+
+  const monthLabelPositions = getMonthLabels();
+
   return (
-    <div className="contribution-heatmap w-full max-w-4xl mx-auto p-4 relative">
-      <h2 className="text-lg font-semibold mb-4 text-gray-900 dark:text-gray-100">
-        投稿活動
-      </h2>
-      
+    <div className="contribution-heatmap w-full mx-auto p-4 relative">
       <div className="bg-white dark:bg-gray-900 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
-        <div className="overflow-x-auto">
-          <div className="inline-flex flex-col gap-1 min-w-fit">
+        <div className="w-full">
+          <div className="flex flex-col gap-1">
             {/* Month labels */}
-            <div className="flex gap-1 mb-2">
+            <div className="flex gap-[2px] mb-2">
               <div className="w-8"></div>
               {weeks.map((week, weekIndex) => {
-                if (weekIndex === 0 || weekIndex % 4 === 0) {
-                  const firstDay = new Date(week[0]?.date);
-                  return (
-                    <div 
-                      key={weekIndex} 
-                      className="text-xs text-gray-600 dark:text-gray-400 w-3 text-center"
-                    >
-                      {monthLabels[firstDay.getMonth()]}
-                    </div>
-                  );
-                }
-                return <div key={weekIndex} className="w-3"></div>;
+                const monthLabel = monthLabelPositions.find(label => label.weekIndex === weekIndex);
+                return (
+                  <div 
+                    key={weekIndex} 
+                    className="text-xs text-gray-600 dark:text-gray-400 flex-1 text-center min-w-[12px]"
+                  >
+                    {monthLabel ? monthLabel.month : ''}
+                  </div>
+                );
               })}
             </div>
 
             {/* Day labels and grid */}
-            <div className="flex gap-1">
+            <div className="flex gap-[2px]">
               {/* Day labels */}
-              <div className="flex flex-col gap-1">
+              <div className="flex flex-col gap-[2px]">
                 {dayLabels.map((label, index) => (
                   <div 
                     key={label} 
@@ -125,16 +145,16 @@ export function ContributionHeatmap({ posts }: ContributionHeatmapProps) {
               </div>
 
               {/* Heatmap grid */}
-              <div className="flex gap-1">
+              <div className="flex gap-[2px] flex-1">
                 {weeks.map((week, weekIndex) => (
-                  <div key={weekIndex} className="flex flex-col gap-1">
+                  <div key={weekIndex} className="flex flex-col gap-[2px] flex-1">
                     {Array.from({ length: 7 }, (_, dayIndex) => {
                       const dayData = week[dayIndex];
                       if (!dayData) {
                         return (
                           <div 
                             key={`empty-${dayIndex}`} 
-                            className="w-3 h-3"
+                            className="w-full h-3 min-w-[10px]"
                           />
                         );
                       }
@@ -142,7 +162,7 @@ export function ContributionHeatmap({ posts }: ContributionHeatmapProps) {
                       return (
                         <div
                           key={dayData.date}
-                          className={`w-3 h-3 rounded-[2px] ${getColorClass(dayData.level)} border-[0.5px] border-gray-300 dark:border-gray-700 cursor-pointer transition-all hover:scale-110 hover:shadow-md`}
+                          className={`w-full h-3 min-w-[10px] rounded-[2px] ${getColorClass(dayData.level)} border-[0.5px] border-gray-300 dark:border-gray-700 cursor-pointer transition-all hover:scale-110 hover:shadow-md`}
                           onMouseEnter={(e) => {
                             const rect = e.currentTarget.getBoundingClientRect();
                             setHoveredDay({
@@ -164,8 +184,7 @@ export function ContributionHeatmap({ posts }: ContributionHeatmapProps) {
         </div>
 
         {/* Legend */}
-        <div className="flex items-center justify-between mt-4 text-xs text-gray-600 dark:text-gray-400">
-          <span>過去1年間の投稿活動</span>
+        <div className="flex items-center justify-end mt-4 text-xs text-gray-600 dark:text-gray-400">
           <div className="flex items-center gap-1">
             <span>Less</span>
             <div className="flex gap-1">
