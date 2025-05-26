@@ -214,7 +214,7 @@ export function ContributionHeatmap({ posts }: ContributionHeatmapProps) {
       {/* Popover */}
       {hoveredDay && (
         <div
-          className="fixed z-50 px-3 py-2 text-sm text-white bg-gray-900 dark:bg-gray-800 rounded-lg shadow-lg pointer-events-none transform -translate-x-1/2 -translate-y-full"
+          className="fixed z-50 px-3 py-2 text-sm text-white bg-gray-900 dark:bg-gray-800 rounded-lg shadow-lg pointer-events-none transform -translate-x-1/2 -translate-y-full min-w-max"
           style={{
             left: hoveredDay.x,
             top: hoveredDay.y,
