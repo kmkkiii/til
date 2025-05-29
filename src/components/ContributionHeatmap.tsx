@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useEffect, useState } from 'react';
 import type { Post } from '../lib/post';
 
 interface ContributionHeatmapProps {
@@ -13,6 +13,7 @@ interface DayData {
 
 export function ContributionHeatmap({ posts }: ContributionHeatmapProps) {
   const [hoveredDay, setHoveredDay] = useState<{ x: number; y: number; date: string; count: number } | null>(null);
+  const [heatmapData, setHeatmapData] = useState<DayData[]>([]);
 
   // JSTの日付文字列を取得するヘルパー関数
   const getJSTDateString = (date: Date): string => {
@@ -21,13 +22,12 @@ export function ContributionHeatmap({ posts }: ContributionHeatmapProps) {
   };
 
   const generateHeatmapData = (): DayData[] => {
-    // JST基準での現在日時
+    // クライアントサイドでのみ実行されることを前提とし、JST基準で統一
     const now = new Date();
-    const jstNow = new Date(now.getTime() + (9 * 60 * 60 * 1000));
-    const endDate = new Date(jstNow.getFullYear(), jstNow.getMonth(), jstNow.getDate());
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
 
-    const startDate = new Date(endDate);
-    startDate.setFullYear(endDate.getFullYear() - 1);
+    const startDate = new Date(today);
+    startDate.setFullYear(today.getFullYear() - 1);
 
     // startDateをその週の日曜日に調整
     const dayOfWeek = startDate.getDay(); // 0 (Sun) - 6 (Sat)
@@ -45,7 +45,7 @@ export function ContributionHeatmap({ posts }: ContributionHeatmapProps) {
     const data: DayData[] = [];
     let currentDate = new Date(startDate);
 
-    while (currentDate <= endDate) {
+    while (currentDate <= today) {
       const dateStr = getJSTDateString(currentDate);
       const count = postCounts.get(dateStr) || 0;
 
@@ -74,8 +74,6 @@ export function ContributionHeatmap({ posts }: ContributionHeatmapProps) {
 
     return data;
   };
-
-  const heatmapData = generateHeatmapData();
 
   const getColorClass = (level: number): string => {
     switch (level) {
@@ -132,6 +130,10 @@ export function ContributionHeatmap({ posts }: ContributionHeatmapProps) {
   };
 
   const monthLabelPositions = getMonthLabels();
+
+  useEffect(() => {
+    setHeatmapData(generateHeatmapData());
+  }, [posts]);
 
   return (
     <div className="contribution-heatmap w-full mx-auto relative">
