@@ -12,7 +12,7 @@ interface Props {
 
 export function PostCard({ post }: Props) {
   return (
-    <Card className="hover:bg-accent my-5">
+    <Card className="hover:bg-accent h-full transition-all duration-200 hover:shadow-md">
       <a href={`/til/${post.id}`}>
         <CardHeader>
           <CardTitle className="text-md">{post.title}</CardTitle>

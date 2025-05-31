@@ -13,7 +13,9 @@ const posts = await getAllPosts();
   <div>
     <ContributionHeatmap posts={posts} client:load />
     <div class="mt-8">
-      { posts.slice(0, 5).map(post => <PostCard post={post} />) }
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        { posts.slice(0, 6).map(post => <PostCard post={post} />) }
+      </div>
       <div class="flex justify-center my-4">
         <a href="/til/2">
           <Button>

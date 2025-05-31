@@ -11,7 +11,7 @@ export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
   const allPosts = await getAllPosts();
 
   return paginate(allPosts, {
-    pageSize: 5,
+    pageSize: 10,
   });
 };
 
@@ -19,27 +19,31 @@ const { page } = Astro.props as { page: Page<Post> };
 ---
 
 <Layout>
-  { page.data.map(post => <PostCard post={post} />) }
-  <Pagination>
-    <PaginationContent>
-      <PaginationItem hidden={!page.url.prev}>
-        <PaginationPrevious href={`${page.url.prev}`} />
-      </PaginationItem>
-      <PaginationItem hidden={!page.url.prev}>
-        <PaginationLink href={`${page.url.prev}`}>{page.currentPage - 1}</PaginationLink>
-      </PaginationItem>
-      <PaginationItem>
-        <PaginationLink isActive>{page.currentPage}</PaginationLink>
-      </PaginationItem>
-      <PaginationItem hidden={!page.url.next}>
-        <PaginationLink href={`${page.url.next}`}>{page.currentPage + 1}</PaginationLink>
-      </PaginationItem>
-      <PaginationItem hidden={page.currentPage + 1 <= page.total}>
-        <PaginationEllipsis />
-      </PaginationItem>
-      <PaginationItem hidden={!page.url.next}>
-        <PaginationNext href={`${page.url.next}`} />
-      </PaginationItem>
-    </PaginationContent>
-  </Pagination>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    { page.data.map(post => <PostCard post={post} />) }
+  </div>
+  <div class="flex justify-center mt-8 mb-8">
+    <Pagination>
+      <PaginationContent>
+        <PaginationItem hidden={!page.url.prev}>
+          <PaginationPrevious href={`${page.url.prev}`} />
+        </PaginationItem>
+        <PaginationItem hidden={!page.url.prev}>
+          <PaginationLink href={`${page.url.prev}`}>{page.currentPage - 1}</PaginationLink>
+        </PaginationItem>
+        <PaginationItem>
+          <PaginationLink isActive>{page.currentPage}</PaginationLink>
+        </PaginationItem>
+        <PaginationItem hidden={!page.url.next}>
+          <PaginationLink href={`${page.url.next}`}>{page.currentPage + 1}</PaginationLink>
+        </PaginationItem>
+        <PaginationItem hidden={page.currentPage + 1 <= page.total}>
+          <PaginationEllipsis />
+        </PaginationItem>
+        <PaginationItem hidden={!page.url.next}>
+          <PaginationNext href={`${page.url.next}`} />
+        </PaginationItem>
+      </PaginationContent>
+    </Pagination>
+  </div>
 </Layout>
