@@ -1,5 +1,7 @@
 # Today I Learned
 
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/kmkkiii/til)
+
 <p align='center'>
   <img src="https://img.shields.io/badge/Astro-0C1222?style=for-the-badge&logo=astro&logoColor=FDFDFE">
   <img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white">
