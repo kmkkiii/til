@@ -26,8 +26,10 @@ export function ContributionHeatmap({ posts }: ContributionHeatmapProps) {
     const now = new Date();
     const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
 
+    // 前年の現在日付の翌日を開始日とする
     const startDate = new Date(today);
     startDate.setFullYear(today.getFullYear() - 1);
+    startDate.setDate(startDate.getDate() + 1);
 
     // startDateをその週の日曜日に調整
     const dayOfWeek = startDate.getDay(); // 0 (Sun) - 6 (Sat)
