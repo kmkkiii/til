@@ -12,4 +12,4 @@ content:
       - {name: date, label: Date, type: date}
       - {name: tags, label: Tags, type: string, list: true}
       - {name: published, label: Published, type: boolean}
-      - {name: body, label: Body, type: rich-text}
+      - {name: body, label: Body, type: code, options: { language: markdown }}
