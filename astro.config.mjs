@@ -12,11 +12,4 @@ export default defineConfig({
   }), react(), sitemap()],
   site: 'https://kmkkiii.github.io',
   base: '/til',
-  image: {
-    // Used for all `<Image />` and `<Picture />` components unless overridden
-    experimentalLayout: 'constrained',
-  },
-  experimental: {
-    responsiveImages: true,
-  },
 });
