@@ -8,8 +8,8 @@
     "build": "astro check && astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint": "oxlint .",
+    "lint:fix": "oxlint . --fix"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
@@ -36,8 +36,6 @@
     "zenn-markdown-html": "^0.1.154"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^2.25.0",
-    "eslint": "^8.57.0",
-    "eslint-plugin-astro": "^1.2.3"
+    "oxlint": "^1.2.0"
   }
 }
