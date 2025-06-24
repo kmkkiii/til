@@ -4,6 +4,7 @@ import lib from 'zenn-markdown-html';
 import { getAllPosts } from '../../lib/post';
 import Layout from '../../layouts/Layout.astro';
 import { Post } from '@/components/Post';
+import { TableOfContents } from '../../components/TableOfContents';
 
 type MarkdownOptions = {
   embedOrigin: string;
@@ -51,20 +52,25 @@ const html = markdownHtml(body, {
 ---
 
 <Layout title={title} tags={tags} body={body}>
-  <div class="px-4 pb-4 max-w-3xl m-auto">
-    <div class="pb-5 border-b-2 border-dashed dark:border-slate-500 mb-10">
-      <div>{date}</div>
-      <h1 class="font-bold text-4xl">{title}</h1>
-      <div class="flex flex-wrap">
-        {
-          tags.map(tag => (
-            <div class="bg-slate-300 dark:bg-slate-500 rounded-xl px-3 py-1 text-sm mr-2 mt-2">
-              {tag}
-            </div>
-          ))
-        }
+  <div class="relative">
+    <div class="px-4 pb-4 max-w-3xl m-auto">
+      <div class="pb-5 border-b-2 border-dashed dark:border-slate-500 mb-10">
+        <div>{date}</div>
+        <h1 class="font-bold text-4xl">{title}</h1>
+        <div class="flex flex-wrap">
+          {
+            tags.map(tag => (
+              <div class="bg-slate-300 dark:bg-slate-500 rounded-xl px-3 py-1 text-sm mr-2 mt-2">
+                {tag}
+              </div>
+            ))
+          }
+        </div>
       </div>
+      <Post html={html} />
     </div>
-    <Post html={html} />
+    <aside class="hidden xl:block fixed top-1/2 -translate-y-1/2 left-[calc(50%+26rem)] w-64 max-h-[80vh]">
+      <TableOfContents html={html} client:load />
+    </aside>
   </div>
 </Layout>
