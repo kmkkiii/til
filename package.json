@@ -36,6 +36,7 @@
     "zenn-markdown-html": "^0.2.0"
   },
   "devDependencies": {
+    "@typescript/native-preview": "^7.0.0-dev.20251203.1",
     "oxlint": "^1.2.0"
   }
 }
