@@ -25,15 +25,15 @@
     "astro": "^5.0.2",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
-    "lucide-react": "^0.555.0",
+    "lucide-react": "^0.562.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "tailwind-merge": "^2.4.0",
     "tailwindcss": "^3.4.7",
     "tailwindcss-animate": "^1.0.7",
     "typescript": "^5.5.4",
-    "zenn-content-css": "^0.2.0",
-    "zenn-markdown-html": "^0.2.0"
+    "zenn-content-css": "^0.3.0",
+    "zenn-markdown-html": "^0.3.0"
   },
   "devDependencies": {
     "@typescript/native-preview": "^7.0.0-dev.20251203.1",
