@@ -9,7 +9,7 @@ import { TableOfContents } from '../../components/TableOfContents';
 type MarkdownOptions = {
   embedOrigin: string;
 };
-type MarkdownHtml = (text: string, options?: MarkdownOptions) => string;
+type MarkdownHtml = (text: string, options?: MarkdownOptions) => Promise<string>;
 type MarkdownHtmlAtBuild = { default: MarkdownHtml };
 
 let markdownHtml!: MarkdownHtml;
@@ -48,7 +48,7 @@ export async function getStaticPaths() {
 }
 
 const { title, tags, date, body } = Astro.props;
-const html = markdownHtml(body, {
+const html = await markdownHtml(body, {
   embedOrigin: 'https://embed.zenn.studio',
 });
 ---
