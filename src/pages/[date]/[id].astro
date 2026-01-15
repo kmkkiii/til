@@ -12,7 +12,7 @@ type MarkdownOptions = {
 type MarkdownHtml = (text: string, options?: MarkdownOptions) => string;
 type MarkdownHtmlAtBuild = { default: MarkdownHtml };
 
-let markdownHtml: MarkdownHtml;
+let markdownHtml!: MarkdownHtml;
 
 if (typeof lib === 'function') {
   markdownHtml = lib as MarkdownHtml;
