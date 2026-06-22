@@ -1,5 +1,9 @@
 # Today I Learned
 
+> [!NOTE]
+> このリポジトリの記事は `blog` リポジトリへ移行済みです。
+> 今後の記事管理は https://github.com/kmkkiii/blog で行います。
+
 <p align='center'>
   <img src="https://img.shields.io/badge/Astro-0C1222?style=for-the-badge&logo=astro&logoColor=FDFDFE">
   <img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white">
